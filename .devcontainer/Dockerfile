@@ -35,17 +35,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Match the usual WSL user so files created in the bind-mounted workspace
-# stay owned by the host user instead of root.
-ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=1000
+# ubuntu:24.04 already provides an `ubuntu` user with UID/GID 1000
+# (member of sudo, video and plugdev), so reuse it instead of creating
+# another user. Dev Containers rewrites the UID at runtime when the host
+# user differs.
+USER ubuntu
 
-RUN groupadd --gid "${USER_GID}" "${USERNAME}" \
-    && useradd --uid "${USER_UID}" --gid "${USER_GID}" \
-               --create-home --shell /bin/bash "${USERNAME}"
-
-USER ${USERNAME}
 WORKDIR /workspaces
 
 CMD [ "bash" ]

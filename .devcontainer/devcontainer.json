@@ -1,7 +1,7 @@
 {
   "name": "aBaja STM32",
   "image": "ghcr.io/fx991/abajastmstarter-dev:latest",
-  "remoteUser": "vscode",
+  "remoteUser": "ubuntu",
   "customizations": {
     "vscode": {
       "extensions": [
