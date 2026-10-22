@@ -1,0 +1,22 @@
+{
+  "name": "aBaja STM32",
+  "image": "ghcr.io/fx991/abajastmstarter-dev:latest",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "llvm-vs-code-extensions.vscode-clangd",
+        "ms-vscode.cmake-tools",
+        "marus25.cortex-debug"
+      ],
+      "settings": {
+        "cmake.generator": "Ninja",
+        "cmake.configureOnOpen": false,
+        "clangd.arguments": [
+          "--compile-commands-dir=build/Debug"
+        ]
+      }
+    }
+  },
+  "postCreateCommand": "cmake --preset Debug && ln -sf build/Debug/compile_commands.json compile_commands.json"
+}
